@@ -1,4 +1,4 @@
-package bigdata.expMapReduce;
+package expMapReduce;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
@@ -18,9 +18,9 @@ public class Map extends Mapper<Object, Text, Text, Text> {
 			// - clé: doc.genre
 			String mkey = doc.getString("genre");
 			// - valeur: doc.actors.length
-			int mvalue = doc.getJsonArray("actors").length;
+			int mvalue = doc.getJSONArray("actors").length();
 			// - write(clé, valeur)
-			context.write(new Text(mkey.toString()), new Text(mvalue.toString()));
+			context.write(new Text(mkey.toString()), new Text(String.valueOf(mvalue)));
 			// ###FIN
 
 		} catch(JSONException e) {
